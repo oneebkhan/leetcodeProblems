@@ -18,15 +18,15 @@
 # Example 2:
 # Input: s = "abb"
 # Output: 2
-# Explanation: "abb" -> "bb" -> "". 
+# Explanation: "abb" -> "bb" -> "".
 # Remove palindromic subsequence "a" then "bb".
 
 # Example 3:
 # Input: s = "baabb"
 # Output: 2
-# Explanation: "baabb" -> "b" -> "". 
+# Explanation: "baabb" -> "b" -> "".
 # Remove palindromic subsequence "baab" then "b".
- 
+
 
 # Constraints:
 
@@ -35,7 +35,29 @@
 
 class Solution:
     def removePalindromeSub(self, s: str) -> int:
-        return ''
+        steps: int = 0
+        temp: str = s
+        isEven: bool = len(temp) % 2 == 0
+        while len(temp) > 1:
+            count: int = 0
+            stack: list = []
+            steps = steps + 1
+            for i in range(len(temp)):
+                if len(stack) > 0 and i + count < len(temp) - 1:
+                    if isEven and temp[i + count] == stack[len(stack) - 1]:
+                        temp = temp[:i] + temp[i + 1:]
+                    elif (i + count + 1) < len(temp) - 1 and not isEven and temp[i + count + 1] == stack[len(stack) - 1]:
+                        continue
+                else:
+                    if count == len(temp):
+                        return len(temp)
+
+                    if i == len(temp) - 1:
+                        count = count + 1
+                    print(temp[i+count])
+                    stack.append(temp[i+count])
+        return steps
+
 
 sol = Solution()
 sol.removePalindromeSub()
