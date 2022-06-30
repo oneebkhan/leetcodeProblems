@@ -34,6 +34,7 @@ class Solution:
         if len(tempstr) == 0:
           tempstr = tempstr + str(i)
         array.append(tempstr)
+      print(array)
       return array
 
 sol = Solution()
