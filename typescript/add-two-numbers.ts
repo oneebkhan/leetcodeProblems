@@ -70,11 +70,11 @@ function addTwoNumbers (
   console.log(newString)
   const newListNode = new ListNode()
   let prevNode = new ListNode()
-  prevNode = null
   newString.forEach((n, i) => {
     newListNode.val = parseInt(n, 10)
-    newListNode.next = prevNode
-    prevNode = newListNode ? { ...newListNode } : null
+    newListNode.next = prevNode.val ? prevNode : null
+    // new change here
+    prevNode = newListNode && { ...newListNode }
   })
   return newListNode
 }
